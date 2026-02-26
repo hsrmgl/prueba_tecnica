@@ -7,5 +7,4 @@ public interface SupplierRepositoryPort {
     Optional<Supplier> findByDuns(int duns);
     boolean existsByDuns(int duns);
     List<Supplier> findAllNotDisqualified();
-    void updateRating(int duns, String newRating);
 }
