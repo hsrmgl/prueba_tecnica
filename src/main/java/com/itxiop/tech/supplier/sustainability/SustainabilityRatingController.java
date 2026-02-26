@@ -1,18 +1,16 @@
 package com.itxiop.tech.supplier.sustainability;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequiredArgsConstructor
 class SustainabilityRatingController {
 
-    private ApplicationEventPublisher publisher;
-
-    SustainabilityRatingController(ApplicationEventPublisher publisher) {
-        this.publisher = publisher;
-    }
+    private final ApplicationEventPublisher publisher;
 
     @PostMapping("/sustainability/update")
     void updateSustainability(@RequestBody SustainabilityRating score) {

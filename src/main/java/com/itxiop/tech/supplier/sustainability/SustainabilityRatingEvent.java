@@ -1,7 +1,9 @@
 package com.itxiop.tech.supplier.sustainability;
 
+import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
+@Getter
 public class SustainabilityRatingEvent extends ApplicationEvent {
 
     private final int duns;
@@ -12,14 +14,6 @@ public class SustainabilityRatingEvent extends ApplicationEvent {
         super(source);
         this.duns = duns;
         this.score = score;
-    }
-
-    public int getDuns() {
-        return duns;
-    }
-
-    public String getScore() {
-        return score;
     }
 
 }

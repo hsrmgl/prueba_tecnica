@@ -3,37 +3,33 @@ package com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest;
 import com.itxiop.tech.supplier.sandbox.domain.model.Candidate;
 import com.itxiop.tech.supplier.sandbox.domain.port.in.*;
 import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.dto.*;
+import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.mapper.CandidateMapper;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequiredArgsConstructor
 public class CandidateController {
 
     private final CreateCandidateUseCase createCandidate;
     private final AcceptCandidateUseCase acceptCandidate;
     private final RefuseCandidateUseCase refuseCandidate;
     private final GetCandidateUseCase getCandidate;
-
-    public CandidateController(CreateCandidateUseCase createCandidate, AcceptCandidateUseCase acceptCandidate,
-                                RefuseCandidateUseCase refuseCandidate, GetCandidateUseCase getCandidate) {
-        this.createCandidate = createCandidate;
-        this.acceptCandidate = acceptCandidate;
-        this.refuseCandidate = refuseCandidate;
-        this.getCandidate = getCandidate;
-    }
+    private final CandidateMapper candidateMapper;
 
     @PostMapping("/candidates")
     @ResponseStatus(HttpStatus.CREATED)
     public CandidateResponse create(@Valid @RequestBody CandidateRequest request) {
         Candidate c = createCandidate.create(request.name(), request.duns(), request.country(), request.annualTurnover());
-        return new CandidateResponse(c.name(), c.duns(), c.country(), c.annualTurnover());
+        return candidateMapper.toCandidateResponse(c);
     }
 
     @GetMapping("/candidates/{duns}")
     public CandidateResponse get(@PathVariable int duns) {
         Candidate c = getCandidate.get(duns);
-        return new CandidateResponse(c.name(), c.duns(), c.country(), c.annualTurnover());
+        return candidateMapper.toCandidateResponse(c);
     }
 
     @PostMapping("/candidates/{duns}/accept")

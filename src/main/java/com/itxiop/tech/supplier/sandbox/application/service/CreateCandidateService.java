@@ -6,20 +6,16 @@ import com.itxiop.tech.supplier.sandbox.domain.model.Candidate;
 import com.itxiop.tech.supplier.sandbox.domain.port.in.CreateCandidateUseCase;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.CandidateRepositoryPort;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.SupplierRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
+@RequiredArgsConstructor
 public class CreateCandidateService implements CreateCandidateUseCase {
     private final CandidateRepositoryPort candidateRepo;
     private final SupplierRepositoryPort supplierRepo;
     private final DunsLockManager lockManager;
-
-    public CreateCandidateService(CandidateRepositoryPort candidateRepo, SupplierRepositoryPort supplierRepo, DunsLockManager lockManager) {
-        this.candidateRepo = candidateRepo;
-        this.supplierRepo = supplierRepo;
-        this.lockManager = lockManager;
-    }
 
     @Override
     public Candidate create(String name, int duns, String country, long annualTurnover) {

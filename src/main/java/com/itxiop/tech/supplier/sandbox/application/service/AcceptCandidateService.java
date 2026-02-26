@@ -9,10 +9,12 @@ import com.itxiop.tech.supplier.sandbox.domain.port.in.AcceptCandidateUseCase;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.CandidateRepositoryPort;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.CountryVerifierPort;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.SupplierRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
+@RequiredArgsConstructor
 public class AcceptCandidateService implements AcceptCandidateUseCase {
 
     private static final long MINIMUM_ANNUAL_TURNOVER = 1_000_000L;
@@ -21,14 +23,6 @@ public class AcceptCandidateService implements AcceptCandidateUseCase {
     private final SupplierRepositoryPort supplierRepo;
     private final CountryVerifierPort countryVerifier;
     private final DunsLockManager lockManager;
-
-    public AcceptCandidateService(CandidateRepositoryPort candidateRepo, SupplierRepositoryPort supplierRepo,
-                                   CountryVerifierPort countryVerifier, DunsLockManager lockManager) {
-        this.candidateRepo = candidateRepo;
-        this.supplierRepo = supplierRepo;
-        this.countryVerifier = countryVerifier;
-        this.lockManager = lockManager;
-    }
 
     @Override
     public void accept(int duns, String sustainabilityRating) {
