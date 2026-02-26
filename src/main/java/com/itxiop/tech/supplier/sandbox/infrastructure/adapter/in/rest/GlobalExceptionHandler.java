@@ -48,7 +48,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleValidation(MethodArgumentNotValidException e) {
-        return new ErrorResponse("Invalid request");
+        String details = e.getBindingResult().getFieldErrors().stream()
+            .map(fe -> fe.getField() + ": " + fe.getDefaultMessage())
+            .reduce((a, b) -> a + "; " + b)
+            .orElse("Invalid request");
+        return new ErrorResponse(details);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)
