@@ -33,7 +33,8 @@ public class AcceptCandidateService implements AcceptCandidateUseCase {
             .orElseThrow(() -> new CandidateNotFoundException("Candidate not found: " + duns));
         if (countryVerifier.isBanned(candidate.country()))
             throw new CandidateCannotBeAcceptedException("Country is banned: " + candidate.country());
-        if (candidate.annualTurnover() < 1_000_000L)
+        final long minimumAnnualTurnover = 1_000_000L;
+        if (candidate.annualTurnover() < minimumAnnualTurnover)
             throw new CandidateCannotBeAcceptedException("Annual turnover too low: " + candidate.annualTurnover());
 
         ReentrantLock lock = lockManager.getLock(duns);

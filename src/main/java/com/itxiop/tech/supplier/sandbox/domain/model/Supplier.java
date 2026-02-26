@@ -5,8 +5,8 @@ public final class Supplier {
     private final String name;
     private final String country;
     private final long annualTurnover;
-    private volatile String sustainabilityRating;
-    private volatile SupplierInternalStatus internalStatus;
+    private final String sustainabilityRating;
+    private final SupplierInternalStatus internalStatus;
 
     public Supplier(int duns, String name, String country, long annualTurnover, String sustainabilityRating, SupplierInternalStatus internalStatus) {
         this.duns = duns;

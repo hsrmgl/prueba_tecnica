@@ -23,10 +23,13 @@ public class ScoreCalculator {
             .collect(Collectors.toSet());
     }
 
+    private static final double TURNOVER_MULTIPLIER = 0.1;
+    private static final double BONUS_MULTIPLIER = 1.25;
+
     public double calculate(Supplier supplier, Set<Long> bonusTurnoversForCountry) {
         Double ratingConstant = RATING_CONSTANTS.get(supplier.getSustainabilityRating());
         if (ratingConstant == null) throw new IllegalArgumentException("Unknown rating: " + supplier.getSustainabilityRating());
-        double base = supplier.getAnnualTurnover() * 0.1 * ratingConstant;
-        return bonusTurnoversForCountry.contains(supplier.getAnnualTurnover()) ? base * 1.25 : base;
+        double base = supplier.getAnnualTurnover() * TURNOVER_MULTIPLIER * ratingConstant;
+        return bonusTurnoversForCountry.contains(supplier.getAnnualTurnover()) ? base * BONUS_MULTIPLIER : base;
     }
 }
