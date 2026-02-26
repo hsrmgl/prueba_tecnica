@@ -1,5 +1,10 @@
 package com.itxiop.tech.supplier.sandbox.domain.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@Getter
+@AllArgsConstructor
 public final class Supplier {
     private final int duns;
     private final String name;
@@ -14,30 +19,12 @@ public final class Supplier {
         this(duns, name, country, annualTurnover, sustainabilityRating, internalStatus, 0L);
     }
 
-    public Supplier(int duns, String name, String country, long annualTurnover,
-                    SustainabilityRating sustainabilityRating, SupplierInternalStatus internalStatus, long version) {
-        this.duns = duns;
-        this.name = name;
-        this.country = country;
-        this.annualTurnover = annualTurnover;
-        this.sustainabilityRating = sustainabilityRating;
-        this.internalStatus = internalStatus;
-        this.version = version;
-    }
-
     public static Supplier create(int duns, String name, String country, long annualTurnover,
                                   SustainabilityRating rating) {
         return new Supplier(duns, name, country, annualTurnover, rating, SupplierInternalStatus.from(rating));
     }
 
-    public int getDuns() { return duns; }
-    public String getName() { return name; }
-    public String getCountry() { return country; }
-    public long getAnnualTurnover() { return annualTurnover; }
-    public SustainabilityRating getSustainabilityRating() { return sustainabilityRating; }
     public String getSustainabilityRatingValue() { return sustainabilityRating.name(); }
-    public SupplierInternalStatus getInternalStatus() { return internalStatus; }
-    public long getVersion() { return version; }
 
     public boolean isDisqualified() { return internalStatus == SupplierInternalStatus.DISQUALIFIED; }
     public boolean isOnProbation() { return internalStatus == SupplierInternalStatus.ON_PROBATION; }

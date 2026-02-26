@@ -5,16 +5,14 @@ import com.itxiop.tech.supplier.sandbox.domain.exception.SupplierNotFoundExcepti
 import com.itxiop.tech.supplier.sandbox.domain.model.Supplier;
 import com.itxiop.tech.supplier.sandbox.domain.port.in.BanSupplierUseCase;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.SupplierRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class BanSupplierService implements BanSupplierUseCase {
 
     private final SupplierRepositoryPort supplierRepo;
-
-    public BanSupplierService(SupplierRepositoryPort supplierRepo) {
-        this.supplierRepo = supplierRepo;
-    }
 
     @Override
     public void ban(int duns) {

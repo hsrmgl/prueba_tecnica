@@ -4,13 +4,13 @@ import com.itxiop.tech.supplier.sandbox.domain.exception.CandidateNotFoundExcept
 import com.itxiop.tech.supplier.sandbox.domain.model.Candidate;
 import com.itxiop.tech.supplier.sandbox.domain.port.in.GetCandidateUseCase;
 import com.itxiop.tech.supplier.sandbox.domain.port.out.CandidateRepositoryPort;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class GetCandidateService implements GetCandidateUseCase {
     private final CandidateRepositoryPort candidateRepo;
-
-    public GetCandidateService(CandidateRepositoryPort candidateRepo) { this.candidateRepo = candidateRepo; }
 
     @Override
     public Candidate get(int duns) {
