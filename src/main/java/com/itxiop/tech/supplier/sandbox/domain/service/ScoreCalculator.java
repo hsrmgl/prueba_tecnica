@@ -24,7 +24,9 @@ public class ScoreCalculator {
     }
 
     public double calculate(Supplier supplier, Set<Long> bonusTurnoversForCountry) {
-        double base = supplier.getAnnualTurnover() * 0.1 * RATING_CONSTANTS.get(supplier.getSustainabilityRating());
+        Double ratingConstant = RATING_CONSTANTS.get(supplier.getSustainabilityRating());
+        if (ratingConstant == null) throw new IllegalArgumentException("Unknown rating: " + supplier.getSustainabilityRating());
+        double base = supplier.getAnnualTurnover() * 0.1 * ratingConstant;
         return bonusTurnoversForCountry.contains(supplier.getAnnualTurnover()) ? base * 1.25 : base;
     }
 }

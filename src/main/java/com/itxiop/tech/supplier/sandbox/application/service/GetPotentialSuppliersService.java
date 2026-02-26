@@ -35,6 +35,7 @@ public class GetPotentialSuppliersService implements GetPotentialSuppliersUseCas
             .toList();
 
         int total = eligible.size();
-        return new PotentialSuppliersResult(eligible, total, limit, offset);
+        List<PotentialSupplierDto> page = eligible.stream().skip(offset).limit(limit).toList();
+        return new PotentialSuppliersResult(page, total, limit, offset);
     }
 }
