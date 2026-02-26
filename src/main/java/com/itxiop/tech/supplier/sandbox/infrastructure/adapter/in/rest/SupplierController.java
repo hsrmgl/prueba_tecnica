@@ -25,7 +25,8 @@ public class SupplierController {
     @GetMapping("/suppliers/{duns}")
     public SupplierResponse get(@PathVariable int duns) {
         Supplier s = getSupplier.get(duns);
-        return new SupplierResponse(s.getName(), s.getDuns(), s.getCountry(), s.getAnnualTurnover(), s.getApiStatus(), s.getSustainabilityRating());
+        return new SupplierResponse(s.getName(), s.getDuns(), s.getCountry(),
+            s.getAnnualTurnover(), s.getApiStatus(), s.getSustainabilityRatingValue());
     }
 
     @PostMapping("/suppliers/{duns}/ban")
@@ -44,7 +45,7 @@ public class SupplierController {
             .map(dto -> {
                 Supplier s = dto.supplier();
                 return new PotentialSupplierResponse(s.getName(), s.getDuns(), s.getCountry(),
-                    s.getAnnualTurnover(), s.getApiStatus(), s.getSustainabilityRating(), dto.score());
+                    s.getAnnualTurnover(), s.getApiStatus(), s.getSustainabilityRatingValue(), dto.score());
             }).toList();
         return new PotentialSuppliersPageResponse(data, new PaginationResponse(result.limit(), result.offset(), result.total()));
     }
