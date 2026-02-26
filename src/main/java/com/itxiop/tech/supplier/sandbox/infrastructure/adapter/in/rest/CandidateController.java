@@ -3,7 +3,7 @@ package com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest;
 import com.itxiop.tech.supplier.sandbox.domain.model.Candidate;
 import com.itxiop.tech.supplier.sandbox.domain.port.in.*;
 import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.dto.*;
-import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.mapper.CandidateMapper;
+import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.mapper.CandidateResponseMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class CandidateController {
     private final AcceptCandidateUseCase acceptCandidate;
     private final RefuseCandidateUseCase refuseCandidate;
     private final GetCandidateUseCase getCandidate;
-    private final CandidateMapper candidateMapper;
+    private final CandidateResponseMapper candidateMapper;
 
     @PostMapping("/candidates")
     @ResponseStatus(HttpStatus.CREATED)

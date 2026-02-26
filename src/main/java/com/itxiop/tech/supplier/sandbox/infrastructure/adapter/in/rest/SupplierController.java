@@ -4,7 +4,7 @@ import com.itxiop.tech.supplier.sandbox.application.service.PotentialSuppliersRe
 import com.itxiop.tech.supplier.sandbox.domain.model.Supplier;
 import com.itxiop.tech.supplier.sandbox.domain.port.in.*;
 import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.dto.*;
-import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.mapper.SupplierMapper;
+import com.itxiop.tech.supplier.sandbox.infrastructure.adapter.in.rest.mapper.SupplierResponseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +15,7 @@ public class SupplierController {
     private final GetSupplierUseCase getSupplier;
     private final BanSupplierUseCase banSupplier;
     private final GetPotentialSuppliersUseCase getPotentialSuppliers;
-    private final SupplierMapper supplierMapper;
+    private final SupplierResponseMapper supplierMapper;
 
     @GetMapping("/suppliers/{duns}")
     public SupplierResponse get(@PathVariable int duns) {
