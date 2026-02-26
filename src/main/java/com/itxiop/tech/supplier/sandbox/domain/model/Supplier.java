@@ -1,11 +1,9 @@
 package com.itxiop.tech.supplier.sandbox.domain.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Value;
 
-@Getter
-@AllArgsConstructor
-public final class Supplier {
+@Value
+public class Supplier {
     private final int duns;
     private final String name;
     private final String country;
@@ -14,14 +12,9 @@ public final class Supplier {
     private final SupplierInternalStatus internalStatus;
     private final long version;
 
-    public Supplier(int duns, String name, String country, long annualTurnover,
-                    SustainabilityRating sustainabilityRating, SupplierInternalStatus internalStatus) {
-        this(duns, name, country, annualTurnover, sustainabilityRating, internalStatus, 0L);
-    }
-
     public static Supplier create(int duns, String name, String country, long annualTurnover,
                                   SustainabilityRating rating) {
-        return new Supplier(duns, name, country, annualTurnover, rating, SupplierInternalStatus.from(rating));
+        return new Supplier(duns, name, country, annualTurnover, rating, SupplierInternalStatus.from(rating), 0L);
     }
 
     public String getSustainabilityRatingValue() { return sustainabilityRating.name(); }
